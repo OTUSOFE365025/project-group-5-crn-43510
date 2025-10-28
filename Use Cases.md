@@ -1,35 +1,20 @@
-UC-1: Query Academic Info
-A student communicates with AIDAP through text or voice to obtain academic or administrative information such as course schedules, upcoming exams, or grades.
-The natural-language module interprets the query, maps it to structured requests, and retrieves relevant data from systems such as the LMS or registration database.
-Personalized responses are generated using stored interaction history and contextual data.
-This use case is continuous and supports multilingual operation across web, mobile, and voice channels.
+## 4.2.1 Use Case Model — AIDAP (AI-Powered Digital Assistant Platform)
 
-UC-2: Receive Notifications
-Students receive automated alerts related to deadlines, schedule changes, and institutional announcements.
-The notification engine subscribes to event streams from LMS and calendar sources, filtering relevant updates for each authenticated student.
-Notifications can be delivered through chat, email, or mobile push channels based on user preferences.
-Students may modify notification frequency and preferred language through AIDAP’s settings.
+The use-case model in Figure 4.1 identifies the major interactions between stakeholders and the AI-Powered Digital Assistant Platform (AIDAP).  
+Each use case supports one or more functional goals of the system, enabling students, lecturers, administrators, and system maintainers to interact with institutional data and AI services through a unified conversational interface.
 
-UC-3: Manage Course Content
-Lecturers use the assistant to create, upload, or update course materials.
-Through conversational commands such as “Upload week-3 slides,” AIDAP connects to the LMS via secure APIs to store and index new content.
-Access control verifies the lecturer’s identity and role before execution.
-This use case streamlines course management by reducing manual portal navigation.
+---
 
-UC-4: View Analytics Dashboard
-Lecturers and administrators can request analytical summaries (e.g., “Show class engagement for this week”).
-The system aggregates performance, attendance, and usage data from institutional sources and renders graphical dashboards within the assistant interface.
-Administrators can also view overall platform health and usage metrics.
-This use case supports data-driven academic planning and operational decision making.
+| **ID** | **Use Case** | **Description** |
+|:-------|:--------------|:----------------|
+| **UC-1** | **Query Academic Information** | A student communicates with AIDAP through text or voice to obtain personalized academic or administrative information, such as upcoming exams, course schedules, or grades. The Natural-Language Understanding (NLU) module interprets the query and retrieves relevant information from the LMS or registration systems using secure APIs. The response is formatted in conversational language and enriched with contextual details, such as deadlines or related announcements. The system supports multilingual queries and adaptive learning to improve accuracy over time. |
+| **UC-2** | **Receive Notifications** | AIDAP automatically sends students timely alerts regarding important institutional events such as assignment deadlines, timetable changes, or campus announcements. The notification subsystem continuously monitors LMS and calendar data streams, filtering updates based on user identity, enrolled courses, and configured preferences. Notifications are delivered through multiple channels—chat, email, or push—to ensure accessibility. Students can adjust frequency, language, and delivery mode within the assistant’s settings. |
+| **UC-3** | **Manage Course Content** | Lecturers use conversational or dashboard-based commands to upload, modify, or remove course materials accessible to students through AIDAP. The assistant validates lecturer credentials, checks course ownership, and then synchronizes files or text materials with the LMS using RESTful APIs. The system confirms the completion of each upload, maintains version control, and records an activity log for auditing. This use case eliminates repetitive portal navigation and supports voice-driven content updates. |
+| **UC-4** | **View Analytics Dashboard** | Lecturers and administrators request visual or textual summaries of student performance and engagement metrics by issuing commands such as “Show participation statistics for ECE 1010.” AIDAP aggregates data from LMS, attendance records, and grade books to generate graphical dashboards. Administrators can also access institutional-level analytics showing platform usage and system health. This use case facilitates data-driven decision-making, early identification of at-risk students, and improved instructional planning. |
+| **UC-5** | **Manage Integrations** | Administrators configure and maintain integrations that enable AIDAP to access live institutional data. Through secure administrative interfaces, they can add or update API keys for LMS, registration, calendar, and email systems. The assistant validates credentials, applies institutional security policies, and logs each change for traceability. The use case ensures continuous, reliable data flow between AIDAP and university systems, reducing downtime and integration errors. |
+| **UC-6** | **Deploy and Monitor System** | System maintainers manage AIDAP’s deployment, monitoring, and maintenance using the integrated operations dashboard. They can roll out software updates via continuous-deployment pipelines, monitor latency and uptime metrics, and configure alerts for anomalies or failures. The system automatically logs performance metrics and provides rollback mechanisms in case of faulty releases. This use case guarantees service continuity, scalability, and adherence to the 99.5 % availability target. |
 
-UC-5: Manage Integrations
-Administrators configure and maintain the institutional integrations that enable AIDAP to access real-time data.
-Through secure administrative commands or web interfaces, they add, update, or disable connections to LMS, registration, calendar, and email systems.
-The assistant validates credentials, applies institutional security policies, and logs each configuration change for auditability.
-This ensures consistent data synchronization across all connected services.
+---
 
-UC-6: Deploy and Monitor System
-System maintainers oversee deployment and runtime monitoring of AIDAP’s cloud-native services.
-They use an integrated dashboard to track system latency, error rates, and resource utilization, and can trigger zero-downtime updates through continuous-deployment pipelines.
-The system automatically detects anomalies and notifies maintainers of failures, providing logs and rollback options to maintain high availability.
-This use case ensures the reliability and performance of the AIDAP infrastructure.
+> **Figure 4.1 – Use Case Model for AIDAP**  
+> *(Insert UML Use-Case Diagram showing Students, Lecturers, Administrators, Maintainers, and Data-Source Systems interacting with the AIDAP system.)*
