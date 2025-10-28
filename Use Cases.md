@@ -18,3 +18,4 @@ Each use case supports one or more functional goals of the system, enabling stud
 
 > **Figure 4.1 – Use Case Model for AIDAP**  
 > *(Insert UML Use-Case Diagram showing Students, Lecturers, Administrators, Maintainers, and Data-Source Systems interacting with the AIDAP system.)*
+> 
