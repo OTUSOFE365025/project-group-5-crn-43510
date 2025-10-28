@@ -1,4 +1,4 @@
-## 1.0 Business Case: AI-Powered Digital Assistant Platform (AIDAP)
+## Business Case: AI-Powered Digital Assistant Platform (AIDAP)
 
 ---
 
