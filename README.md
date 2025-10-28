@@ -14,3 +14,5 @@ Includes Architectural Drivers (derived from the given requirements):
 - System Constraints 
 - Architectural Concerns
 - Business Case
+
+# Note: All tables used in the markdown files of Deliverable 1 were generated using the following resource: https://www.tablesgenerator.com/markdown_tables in order to follow the ADD FCAPS Case Study Formatting.
