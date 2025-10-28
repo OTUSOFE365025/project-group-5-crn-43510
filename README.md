@@ -2,9 +2,10 @@
 SOFE3650F25 Project Repository for Group Number: 5
 
 ## Group Members:
-- Name: Eesha Razia | Student ID: 100930229
+- Name: Eesha Razia | Student ID: 100930229 | Contribution: Use Case models, Quality Attributes, Business Case
 
-- Name: Sayyeda Faruqui | Student ID: 100912573
+- Name: Sayyeda Faruqui | Student ID: 100912573 | Contribution: System Constraints, Architectural Concerns, Business Case
+
 
 ## Deliverable 1: Requirements Analysis
 
