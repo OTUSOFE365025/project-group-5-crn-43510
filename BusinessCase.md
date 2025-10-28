@@ -1,28 +1,3 @@
-## Business Case – AIDAP
+The AI-Powered Digital Assistant Platform (AIDAP) addresses the need for a unified, conversational interface to institutional data at Ontario Tech University, where existing tools are fragmented and require manual navigation. The core solution integrates with external systems like the LMS, registration, and calendar to provide students, lecturers, and administrators with secure, personalized access to schedules, deadlines, announcements, and academic analytics via natural-language queries (text or voice). AIDAP is designed to be highly available (99.5% uptime) and responsive (2-second average latency), ensuring a seamless user experience across mobile and web platforms while strictly adhering to data privacy and security policies through features like single sign-on (SSO).
 
-### Background
-Ontario Tech University aims to enhance student and faculty engagement through a conversational AI assistant. Existing tools (LMS, email, portal) are fragmented and require manual navigation.
-
-### Problem Statement
-Students, lecturers, and administrators need a unified platform to access institutional data—course schedules, announcements, analytics—via natural-language conversation.
-
-### Proposed Solution
-AIDAP provides an AI-powered digital assistant that integrates with LMS, registration, and calendars, enabling users to query or update data via text or voice. It personalizes responses and ensures data security through institutional SSO.
-
-### Stakeholders
-- **Students (S):** End-users querying academic data  
-- **Lecturers (L):** Manage content and respond to class queries  
-- **Administrators (A):** Configure integrations and monitor usage  
-- **System Maintainer (M):** Manages deployment and monitoring  
-- **Data Source Systems (D):** LMS, registration, calendar APIs  
-
-### Scope
-Includes: AI query processing, data retrieval, dashboard visualization, and notification system.  
-Excludes: Development of LMS or registration systems themselves.
-
-### Expected Benefits
-- Centralized access to institutional data  
-- 2 s response latency under normal load  
-- 99.5 % uptime  
-- Improved communication and analytics visibility
-
+The strategic implementation of AIDAP promises significant operational and engagement benefits by centralizing data access and automating interactions. For students and lecturers, the platform enhances communication through personalized notifications and simplified content management. Administrators gain robust tools for managing integrations, broadcasting announcements, and generating system-wide analytics reports. The project, scoped to include AI processing, data retrieval, and dashboard visualization (excluding core LMS development), represents a crucial investment in modernizing data access, improving stakeholder satisfaction, and boosting institutional efficiency and data utilization.
