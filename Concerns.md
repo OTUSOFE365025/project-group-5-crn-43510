@@ -1,8 +1,6 @@
-## 4.2.4 Architectural Concerns — AIDAP
+## Architectural Concerns — AIDAP
 
-The following architectural concerns were identified during the initial design phase of the AI-Powered Digital Assistant Platform (AIDAP).  
-These concerns reflect major design priorities and risks that will guide architectural decisions in later iterations of the ADD process.  
-Each concern captures a key consideration that impacts maintainability, scalability, and overall system quality.
+The following architectural concerns were identified during the initial design phase of the AI-Powered Digital Assistant Platform (AIDAP). These concerns reflect major design priorities and risks that will guide architectural decisions in later iterations of the ADD process. Each concern captures a key consideration that impacts maintainability, scalability, and overall system quality.
 
 ---
 
@@ -16,6 +14,3 @@ Each concern captures a key consideration that impacts maintainability, scalabil
 | **CRN-6** | **Provide Clear Module Responsibility Allocation for Team Members** | Define ownership and responsibilities for each system module (e.g., frontend, NLP, data API, infrastructure). Clear allocation of work supports effective collaboration, parallel development, and easier testing across sub-teams. |
 
 ---
-
-> **Figure 4.3 – Architectural Concerns for AIDAP**  
-> *(These concerns establish the foundation for subsequent ADD iterations and influence key design decisions such as modularization, technology selection, and deployment strategy.)*
