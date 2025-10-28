@@ -1,1 +1,20 @@
-Add the Use Cases to this file
+## Use Case Model — AIDAP (AI-Powered Digital Assistant Platform)
+
+The use cases outlined in the table below identifies the major interactions between stakeholders and the AI-Powered Digital Assistant Platform (AIDAP). Each use case supports one or more functional goals of the system, enabling students, lecturers, administrators, and system maintainers to interact with institutional data and AI services through a unified conversational interface.
+
+---
+
+| **ID** | **Use Case** | **Description** |
+|:-------|:--------------|:----------------|
+| **UC-1** | **Access Academic Details** | A student communicates with AIDAP through text or voice to recieve personalized academic or administrative information, such as information regarding upcoming exams, course schedules, or grades. The Natural-Language Understanding (NLU) module interprets the query and retrieves relevant information from the LMS or registration systems using secure APIs. The response is formatted in conversational language and enriched with contextual details, such as deadlines or related announcements. The system supports multilingual queries and adaptive learning to improve accuracy over time. |
+| **UC-2** | **Receive Notifications** | AIDAP automatically sends students timely alerts regarding important institutional events such as assignment deadlines, timetable changes, or announcements. The notification subsystem continuously monitors LMS and calendar data streams, filtering updates based on user identity, enrolled courses, and configured preferences. Notifications are delivered through multiple channels—chat, email, or push—to ensure accessibility. Students can adjust frequency, language, and delivery mode within the assistant’s settings. |
+| **UC-3** | **Manage Course Materials** | Lecturers use conversational or dashboard-based commands to upload, modify, or remove course materials accessible to students through AIDAP. The assistant validates lecturer credentials, checks course ownership, and then synchronizes files or text materials with the LMS using RESTful APIs. The system confirms the completion of each upload, maintains version control, and records an activity log for auditing. This use case eliminates repetitive portal navigation and supports voice-driven content updates. |
+| **UC-4** | **Review Performance Dashboard** | Lecturers and administrators request visual or textual summaries of student performance and engagement metrics by issuing commands such as “Show participation statistics for MATH 1010.” AIDAP aggregates data from LMS, attendance records, and grade books to generate visual dashboards. Administrators can also access institutional-level analytics showing platform usage. This use case facilitates data-driven decision-making, early identification of at-risk students, and improved instructional planning. |
+| **UC-5** | **Regulate System Integrations** | Administrators configure and maintain system integrations that enable AIDAP to access live institutional data. Through secure administrative interfaces, they can add or update API keys for LMS, registration, calendar, and email systems. The assistant validates credentials, applies institutional security policies, and logs each change for traceability. The use case ensures continuous, reliable data flow between AIDAP and university systems, reducing downtime and integration errors. |
+| **UC-6** | **Deploy and Maintain System** | System maintainers manage AIDAP’s deployment, monitoring, and maintenance using the integrated operations dashboard. They can roll out software updates via continuous-deployment pipelines, monitor latency and uptime metrics, and configure alerts for anomalies or failures. The system automatically logs performance metrics and provides rollback mechanisms in case of faulty releases. This use case guarantees service continuity, scalability, and adherence to the 99.5 % availability target. |
+
+---
+
+> **Figure 1 – UML Use Case Diagram for AIDAP**
+<img width="1562" height="973" alt="image" src="https://github.com/user-attachments/assets/c1d2c7cd-2006-42a6-8611-8ac0d3857cde" />
+
