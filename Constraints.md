@@ -1,7 +1,6 @@
-## 4.2.3 System Constraints — AIDAP
+## System Constraints — AIDAP
 
-The following constraints outline the key technical and operational boundaries within which the **AI-Powered Digital Assistant Platform (AIDAP)** must function.  
-These limitations shape the system’s architecture and ensure that AIDAP remains scalable, secure, and reliable while meeting the needs of all university stakeholders.
+The following constraints outline the key technical and operational boundaries within which the AI-Powered Digital Assistant Platform (AIDAP) must function. These limitations shape the system’s architecture and ensure that AIDAP remains scalable, secure, and reliable while meeting the needs of all university stakeholders.
 
 ---
 
