@@ -1,14 +1,21 @@
 ## 4.2.3 System Constraints — AIDAP
 
-The following constraints define the technical and operational boundaries under which the **AI-Powered Digital Assistant Platform (AIDAP)** must operate.  
-These constraints guide architectural decisions and ensure compliance with institutional requirements for scalability, reliability, and security.
+The following constraints outline the key technical and operational boundaries within which the **AI-Powered Digital Assistant Platform (AIDAP)** must function.  
+These limitations shape the system’s architecture and ensure that AIDAP remains scalable, secure, and reliable while meeting the needs of all university stakeholders.
+
+---
 
 | **ID** | **Constraint** | **Description** |
 |---------|----------------|-----------------|
-| **CON-1** | **Scalability Requirement** | The system shall support a minimum of 5 000 concurrent users under normal operating conditions. This limit reflects expected peak university usage during registration or examination periods and defines baseline capacity for horizontal scaling and load balancing. |
-| **CON-2** | **Cross-Platform Access** | AIDAP must be accessible through modern web and mobile browsers (Chrome v100+, Firefox v95+, Safari 15+, Edge 100+) and through approved mobile apps. Browser compatibility ensures accessibility for students and staff across Windows, macOS, Android, and iOS platforms. |
-| **CON-3** | **Cloud Deployment Environment** | The system shall be deployed on a university-approved cloud platform (e.g., Azure or AWS Education Tier). The cloud environment must support containerized microservices, continuous deployment pipelines, and secure network isolation (VPC/subnets). |
-| **CON-4** | **Privacy and Compliance** | All data handling must comply with institutional privacy and data-retention policies, including PIPEDA and Ontario Tech University security standards. User interactions, logs, and analytics data must be anonymized and retained only for approved durations. |
-| **CON-5** | **Performance Target** | Under normal load, the assistant shall generate responses within 2 seconds for 90 % of queries. This latency target includes natural-language processing, data retrieval, and response rendering to ensure real-time conversational interaction. |
-| **CON-6** | **Availability Objective** | The system shall maintain 99.5 % monthly availability, including fail-over and backup recovery mechanisms. Automatic replication and health monitoring must be implemented to minimize downtime during maintenance or component failure. |
-| **CON-7** | **Unified AI Backend Models** | Both text and voice interfaces shall utilize the same backend AI models and data sources to guarantee consistency in responses. This constraint ensures that updates to the language model or knowledge base propagate uniformly across modalities. |
+| **CON-1** | **Scalability Requirement** | AIDAP must be capable of supporting at least **5,000 users at the same time**. This ensures that even during busy academic periods—such as course registration or final exams—the system remains responsive and stable. The architecture should allow for easy horizontal scaling to handle future growth. |
+| **CON-2** | **Cross-Platform Access** | The platform should work seamlessly across **modern web and mobile browsers**, as well as approved university mobile apps. This guarantees that students, faculty, and staff can access the assistant from any device—whether it’s a laptop, tablet, or smartphone—without technical barriers. |
+| **CON-3** | **Cloud Deployment Environment** | AIDAP will be hosted on a **university-approved cloud service** such as Azure or AWS Education Tier. Using a secure cloud environment ensures reliable performance, automated deployment, and strong protection of institutional data through network isolation and containerized microservices. |
+| **CON-4** | **Privacy and Compliance** | Since AIDAP deals with sensitive academic and personal data, all information handling must strictly follow **Ontario Tech’s privacy and retention policies**, as well as **PIPEDA** standards. User interactions and logs should be anonymized, encrypted, and stored only for the approved duration. |
+| **CON-5** | **Performance Target** | To provide a smooth user experience, the system should respond to most queries in **under two seconds**. This response time includes processing the natural-language input, retrieving information, and generating a clear, conversational reply to the user. |
+| **CON-6** | **Availability Objective** | The platform must achieve at least **99.5% uptime each month**. Built-in fail-over and backup systems will ensure that AIDAP remains available even during maintenance or unexpected technical issues, minimizing disruption to users. |
+| **CON-7** | **Unified AI Backend Models** | Both the **voice and text interfaces** should rely on the same underlying AI models and data sources. This keeps responses consistent across platforms, ensuring that users receive the same quality of information no matter how they interact with the assistant. |
+
+---
+
+> **Figure 4.2 – System Constraints for AIDAP**  
+> *(These constraints establish the foundation for performance, security, and scalability decisions that will influence the architecture of the system.)*
