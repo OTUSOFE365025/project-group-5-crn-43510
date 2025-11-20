@@ -13,3 +13,20 @@ This section presents the results of the activities that are performed in each o
 | **Quality Attribute Scenarios** | The scenarios were described in the Quality Attribute Scenarios section. They have now been prioritized (based on the provided Importance and Difficulty ratings) as follows: <br><br> * **QA-1 (Performance)**: Importance: **High**, Difficulty: **High** <br> * **QA-2 (Availability)**: Importance: **High**, Difficulty: **High** <br> * **QA-3 (Security)**: Importance: **High**, Difficulty: **High** <br> * **QA-4 (Scalability)**: Importance: **High**, Difficulty: **Medium** <br> * **QA-5 (Modifiability)**: Importance: **Medium**, Difficulty: **Medium** |
 | **Constraints** | All of the operational and technical boundaries discussed in the System Constraints section are included as drivers: <br><br> * **CON-1 (Scalability Requirement):** Support $\ge 5,000$ concurrent users. <br> * **CON-2 (Cross-Platform Access):** Seamless operation across web and mobile browsers. <br> * **CON-3 (Cloud Deployment Environment):** Hosted on a university-approved cloud service. <br> * **CON-4 (Privacy and Compliance):** Strict adherence to institutional policies. <br> * **CON-5 (Performance Target):** Response time $\le 2$ seconds for most queries. <br> * **CON-6 (Unified AI Backend Models):** Reliance on a single underlying AI backend for both voice and text. |
 | **Architectural Concerns** | All of the identified design priorities and risks from the Architectural Concerns section are included as drivers: <br><br> * **CRN-1:** Define Overall Microservice and Integration Structure. <br> * **CRN-2:** Utilize Team’s Knowledge of Python (**FastAPI**) and **React** for UI. <br> * **CRN-3:** Ensure Secure Handling of **SSO** and Personally Identifiable Information. <br> * **CRN-4:** Design for Scalability and Cloud Auto-Deployment. <br> * **CRN-5:** Simplify Integration of Future AI Models and External APIs. <br> * **CRN-6:** Provide Clear Module Responsibility Allocation for Team Members. |
+
+## 1.2 - Step 2 - Establish Iteration Goal by Selecting Drivers
+
+This is the **first iteration** in the design of a greenfield system (**AIDAP**), so the iteration goal is to achieve the **architectural concern CRN-1 of establishing an Overall Microservice and Integration Structure** (see the Architectural Concerns section in Step 1).
+
+Although this iteration is driven by a general architectural concern, the architect must keep in mind all of the **drivers** that may influence the general structure of the system. In particular, the architect must be mindful of the following influential drivers:
+
+* **QA-1 (Performance):** The system must generate and deliver a reply within 2 seconds.
+* **QA-2 (Availability):** Fail-over instance must be automatically activated, and the session resumed (Recovery $\le$ 30 seconds for 99.5% uptime).
+* **QA-3 (Security):** 100% of unauthorized access attempts must be blocked and recorded.
+* **QA-4 (Scalability):** The system must handle 5,000 concurrent users and maintain throughput.
+* **CON-2 (Cross-Platform Access):** The platform must work seamlessly across modern web and mobile browsers.
+* **CON-3 (Cloud Deployment Environment):** AIDAP will be hosted on a university approved cloud service (such as Azure or AWS Education Tier).
+* **CON-5 (Performance Target):** Response time must be $\le$ seconds for most queries.
+* **CRN-2 (Utilize Team’s Knowledge):** Leverage team's knowledge of Python (FastAPI) and React for the UI.
+* **CRN-3 (Secure Handling of SSO and PII):** Design must ensure compliance with security and privacy laws for handling user data and SSO tokens.
+* **CRN-4 (Scalability and Cloud Auto-Deployment):** Architect for horizontal scalability using container orchestration and incorporating CI/CD pipelines.
