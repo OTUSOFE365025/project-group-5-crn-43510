@@ -137,7 +137,6 @@ Completed views for this iteration:
 
 ## 2.7 — Step 7: Analyze Current Design & Review Iteration Goal Achievement
 
-### **ADD Kanban-Style Progress Table**
 
 | Driver | Not Addressed | Partially Addressed | Completely Addressed | Decisions Made |
 |--------|---------------|----------------------|-----------------------|----------------|
