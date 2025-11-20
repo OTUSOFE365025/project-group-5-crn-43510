@@ -128,26 +128,28 @@ Some information about relationships between a few elements elements in the diag
 
 ## 1.7 - Step 7 - Perform Analysis of Current Design and Review Iteration Goal and Achievement of Design Purpose
 
-The following table summarizes the design progress by evaluating how well the architectural drivers have been addressed by the decisions made in this first iteration (focused on achieving CRN-1: Establish Overall Microservice and Integration Structure).
+This table summarizes the design progress by evaluating how well the **architectural drivers** have been addressed by the decisions made in this first iteration (focused on achieving **CRN-1: Establish Overall Microservice and Integration Structure**).
 
-| Not Addressed | Partially Addressed | Completely Addressed | Design Decisions Made During the Iteration |
-| :---: | :---: | :---: | :--- |
-| | | **X** | **UC-1 (Access Academic Details)**<br>Selection of the Microservice Architecture and instantiation of the NLP Core Service and Data Integration Service establish the required functional modules. |
-| | | **X** | **UC-2 (Receive Notifications)**<br>Instantiation of the dedicated Notification Service within the Microservice Cluster establishes the required structural element. |
-| | | **X** | **UC-5 (Regulate System Integrations)**<br>The instantiation of the Data Integration Service and the mandate for an API gateway interface (Step 5) establish the dedicated module for secure integration. |
-| | **X** | | **QA-1 (Performance, <= 2 s)**<br>Microservice decomposition isolates the performance-critical NLP Core for independent scaling. More detailed decisions on caching and inter-service latency are required in the next iteration. |
-| | **X** | | **QA-2 (Availability 99.5%)**<br>The Microservice Cluster and Database Tier are explicitly designed as **Replicated** and **Clustered**, respectively, establishing the high-level mechanisms for failover. Detailed configuration and monitoring are pending. |
-| | **X** | | **QA-3 (Security/Blocking Access)**<br>Adoption of the **Layered Security Pattern** and mandatory **SSO integration** (CRN-3) establish the security foundation. The User/SSO Management Service is instantiated, but interface details are needed. |
-| | **X** | | **QA-4 (Scalability >= 5,000 users)**<br>The adoption of **Microservices** and the **Kubernetes Cluster** (Step 4 & 6) lays the foundation for horizontal scaling, directly addressing this driver. Detailed load balancing and resource limits are pending. |
-| | | **X** | **CON-1 (Scalability >= 5,000 users)**<br>Directly supported by the **Microservice Architecture** and the use of a **Replicated Cluster**. Details on deployment configuration need to be finalized to ensure the threshold is met. |
-| | | **X** | **CON-2 (Cross-Platform Access)**<br>Adoption of the **React SPA** architecture ensures the application works seamlessly across modern web and mobile browsers. |
-| | | **X** | **CON-3 (Cloud Deployment)**<br>The design explicitly uses a **Microservice Cluster and Database Tier** hosted within a named University Cloud (Azure/AWS) environment. |
-| | **X** | | **CON-4 (Privacy/Compliance)**<br>The design mandates a dedicated **User/SSO Management Service** and **Encrypted Database Tier**, but the specific data retention and anonymization logic needs to be defined in detail. |
-| | **X** | | **CON-5 (Performance Target <= 2 s)**<br>See QA-1. The high-level structure supports the goal, but no specific optimizations (such as in-memory caching) have been detailed yet. |
-| | | **X** | **CON-6 (Unified AI Backend)**<br>The instantiation of a single **NLP Core Service** built on Python (CRN-2) enforces the use of a unified model and data source for both voice and text queries. |
-| | | **X** | **CRN-1 (Define Overall Structure)**<br>**Goal Achieved.** The selection of the Microservice Architecture, React SPA, and three-tier deployment (Steps 4-6) successfully established the overall system structure. |
-| | | **X** | **CRN-2 (Utilize Team Knowledge)**<br>The selection of **Python (FastAPI)** and **React** for the implementation technologies fully satisfies this concern. |
-| | | **X** | **CRN-3 (Secure Handling of SSO/PII)**<br>The instantiation of the **User/SSO Management Service** and the mandate for secure interfaces directly address this critical concern. |
-| | | **X** | **CRN-4 (Design for Scalability/Cloud)**<br>The selection of the **Microservice Architecture** and **Kubernetes Cluster** (Replicated) fully addresses this concern. |
-| | | **X** | **CRN-5 (Simplify Future AI Integration)**<br>The dedicated, isolated **NLP Core Service** creates a plugin-like boundary, simplifying future model updates with minimal impact to other services. |
-| | **X** | | **CRN-6 (Module Responsibility Allocation)**<br>The instantiation of dedicated services (NLP, Integration, SSO) and the module view sketch have defined high-level ownership. Detailed interface definition is needed to finalize collaboration boundaries. |
+| Architectural Driver | Design Progress | Design Decisions Made During the Iteration |
+| :--- | :--- | :--- |
+| **UC-1 (Access Academic Details)** | **Completely Addressed** | Selection of the **Microservice Architecture** and instantiation of the **NLP Core Service** and **Data Integration Service** establish the required functional modules. |
+| **UC-2 (Receive Notifications)** | **Completely Addressed** | Instantiation of the dedicated **Notification Service** within the Microservice Cluster establishes the required structural element. |
+| **UC-5 (Regulate System Integrations)** | **Completely Addressed** | The instantiation of the **Data Integration Service** and the mandate for an **API gateway interface** (Step 5) establish the dedicated module for secure integration. |
+| **QA-1 (Performance, $\le 2 s$)** | **Partially Addressed** | **Microservice decomposition** isolates the performance-critical **NLP Core** for independent scaling. More detailed decisions on caching and inter-service latency are required in the next iteration. |
+| **QA-2 (Availability 99.5%)** | **Partially Addressed** | The **Microservice Cluster** and **Database Tier** are explicitly designed as **Replicated** and **Clustered**, respectively, establishing the high-level mechanisms for failover. Detailed configuration and monitoring are pending. |
+| **QA-3 (Security/Blocking Access)** | **Partially Addressed** | Adoption of the **Layered Security Pattern** and mandatory **SSO integration** (CRN-3) establish the security foundation. The **User/SSO Management Service** is instantiated, but interface details are needed. |
+| **QA-4 (Scalability $\ge 5,000$ users)** | **Partially Addressed** | The adoption of **Microservices** and the **Kubernetes Cluster** (Step 4 & 6) lays the foundation for **horizontal scaling**, directly addressing this driver. Detailed load balancing and resource limits are pending. |
+| **CON-1 (Scalability $\ge 5,000$ users)** | **Partially Addressed** | Directly supported by the **Microservice Architecture** and the use of a **Replicated Cluster**. Details on deployment configuration need to be finalized to ensure the threshold is met. |
+| **CON-2 (Cross-Platform Access)** | **Completely Addressed** | Adoption of the **React SPA architecture** ensures the application works seamlessly across modern web and mobile browsers. |
+| **CON-3 (Cloud Deployment)** | **Completely Addressed** | The design explicitly uses a **Microservice Cluster** and **Database Tier** hosted within a named **University Cloud (Azure/AWS)** environment. |
+| **CON-4 (Privacy/Compliance)** | **Partially Addressed** | The design mandates a dedicated **User/SSO Management Service** and **Encrypted Database Tier**, but the specific data retention and anonymization logic needs to be defined in detail. |
+| **CON-5 (Performance Target $\le 2 s$)** | **Partially Addressed** | See QA-1. The high-level structure supports the goal, but no specific optimizations (such as in-memory caching) have been detailed yet. |
+| **CON-6 (Unified AI Backend)** | **Completely Addressed** | The instantiation of a single **NLP Core Service** built on **Python** (CRN-2) enforces the use of a unified model and data source for both voice and text queries. |
+| **CRN-1 (Define Overall Structure)** | **Completely Addressed** | **Goal Achieved**. The selection of the **Microservice Architecture**, **React SPA**, and **three-tier deployment** (Steps 4-6) successfully established the overall system structure. |
+| **CRN-2 (Utilize Team Knowledge)** | **Completely Addressed** | The selection of **Python (FastAPI)** and **React** for the implementation technologies fully satisfies this concern. |
+| **CRN-3 (Secure Handling of SSO/PII)** | **Completely Addressed** | The instantiation of the **User/SSO Management Service** and the mandate for secure interfaces directly address this critical concern. |
+| **CRN-4 (Design for Scalability/Cloud)** | **Completely Addressed** | The selection of the **Microservice Architecture** and **Kubernetes Cluster (Replicated)** fully addresses this concern. |
+| **CRN-5 (Simplify Future AI Integration)** | **Completely Addressed** | The dedicated, isolated **NLP Core Service** creates a plugin-like boundary, simplifying future model updates with minimal impact to other services. |
+| **CRN-6 (Module Responsibility Allocation)** | **Partially Addressed** | The instantiation of dedicated services (**NLP, Integration, SSO**) and the module view sketch have defined high-level ownership. Detailed **interface definition** is needed to finalize collaboration boundaries. |
+
+ces (NLP, Integration, SSO) and the module view sketch have defined high-level ownership. Detailed interface definition is needed to finalize collaboration boundaries. |
