@@ -30,3 +30,28 @@ Although this iteration is driven by a general architectural concern, the archit
 * **CRN-2 (Utilize Team’s Knowledge):** Leverage team's knowledge of Python (FastAPI) and React for the UI.
 * **CRN-3 (Secure Handling of SSO and PII):** Design must ensure compliance with security and privacy laws for handling user data and SSO tokens.
 * **CRN-4 (Scalability and Cloud Auto-Deployment):** Architect for horizontal scalability using container orchestration and incorporating CI/CD pipelines.
+
+![alt text](image.png)
+
+## 1.3 - Step 3 - Choose One or More Elements of the System to Refine
+
+The element to refine in the first iteration is the entire **AIDAP system**.
+
+The overall AIDAP system, which is the initial element to be refined in this iteration, is defined by the scope set forth in the business case: integrating core university systems (LMS, registration, calendar) to provide secure, personalized, conversational access to institutional data.
+
+In this first iteration, refinement is performed through **decomposition** driven by the primary architectural concern **CRN-1 (Define Overall Microservice and Integration Structure)** and influenced heavily by the **Security (QA-3)** and **Scalability (QA-4)** quality attribute drivers.
+
+---
+
+## 1.4 - Step 4 - Choose One or More Design Concepts That Satisfy the Selected Drivers
+
+| Design Decisions and Location | Rationale |
+| :--- | :--- |
+| **Logically structure the system using the Microservice Architecture pattern.** | **Rationale:** The Microservice Architecture (MA) is highly appropriate for AIDAP, as it directly addresses multiple drivers:<ul><li>**CRN-1 (Overall Structure):** MA establishes clear, modular boundaries for core services (NLP, Data Integration, User Management).</li><li>**QA-4 (Scalability):** MA enables horizontal scaling of individual, load-intensive components (like the NLP engine) independently of others.</li><li>**CRN-4 (Cloud Auto-Deployment):** MA is the foundational pattern for container orchestration (Kubernetes) and CI/CD, aligning with the cloud strategy.</li><li>**CRN-5 (Modifiability):** Simplifies the integration of future AI models (Stimulus: Integrates a new AI model) by confining changes to a single service.</li></ul>|
+| **Discarded alternatives:** | Monolithic architecture is discarded because it severely complicates scaling critical components (QA-4), auto-deployment (CRN-4), and updating the system (CRN-5). |
+| **Logically structure the Client part using a Single-Page Application (SPA) architecture (React).** | **Rationale:** An SPA architecture aligns directly with two key drivers:<ul><li>**CON-2 (Cross-Platform Access):** SPAs built with frameworks like React ensure a consistent, seamless experience across web and mobile browsers.</li><li>**CRN-2 (Team Knowledge):** Utilizes the team’s pre-existing knowledge of the React framework for rapid development and maintainable code.</li></ul>|
+| **Discarded alternatives:** | Server-Side Rendered (SSR) Web Application is discarded as it provides a less responsive user experience and makes it harder to achieve a rich, application-like feel on mobile/web platforms (influencing QA-1: Performance perceived latency). |
+| **Physically structure the application using the three-tier deployment pattern, implemented with containerization.** | **Rationale:** A containerized three-tier deployment is chosen to meet both structural and operational constraints:<ul><li>**CON-3 (Cloud Deployment):** This pattern is standard for deployment on university-approved cloud services (Azure/AWS).</li><li>**CRN-4 (Scalability/Deployment):** Containerization (Docker/Kubernetes) is the prerequisite for horizontal scaling (QA-4) and automated deployment.</li><li>**CON-5 (Performance Target):** Decoupling the presentation (Tier 1: React SPA), application (Tier 2: FastAPI Microservices), and data (Tier 3: Database) tiers aids in identifying and isolating performance bottlenecks, critical for meeting the $<= 2 \text{ s}$ target.</li></ul>**Note:** To satisfy **QA-2 (Availability)** and **CON-1 (Scalability $\ge$ users)**, Tier 2 and Tier 3 will require redundancy and load balancing (such as database clustering, multiple application instances), which will be addressed in a subsequent iteration. |
+| **Adopt a Layered Security Design Pattern and utilize Single Sign-On (SSO) as a core authentication mechanism.** | **Rationale:** This is a crucial decision driven primarily by security and privacy drivers:<ul><li>**QA-3 (Security):** Layered design ensures defense-in-depth, protecting against the Stimulus: Attempts system access by an unauthorized user.</li><li>**CRN-3 (Secure Handling of SSO and PII):** Explicitly addresses the mandatory requirement to integrate with the institution's SSO system and encrypt PII in transit/at rest.</li></ul>|
+| **Discarded alternatives:** | Internal User or Password Management is discarded because it violates the security and integration goals (CRN-3) by requiring the system to handle sensitive credentials instead of delegating to the established SSO authority. |
+| **Build the backend services using Python with the FastAPI framework.** | **Rationale:** This decision is directly mandated by the technical constraint and knowledge base:<ul><li>**CRN-2 (Utilize Team's Knowledge):** Leverages the development team's existing expertise in Python (FastAPI), maximizing development speed and code maintainability.</li><li>**CON-6 (Unified AI Backend):** Python is the industry standard for AI/NLP models, simplifying the implementation of a single, unified backend model for both voice and text queries.</li></ul>|
