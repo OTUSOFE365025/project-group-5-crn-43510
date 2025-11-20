@@ -1,3 +1,5 @@
+Please note: this file is the original ADD Iteration 1 file from the initial commit of the project repository. All my work for Iteration 1 was done in a Google Doc, where it was easier for me to make tables for many of the steps in order to follow the FCAPS Case Study formatting. I used markdown table generator to convert my Google Doc tables to markdown tables but this plain text file is unable to display the text and tables properly. I tried copying and pasting my work from Google Docs directly into this file, but the formatting is incorrect and messy. Therefore, please refer to ADDIteration1.md to see my work in the correct format for Iteration 1 (Steps 1 to 7, with all diagrams and tables). Thank you. (- Sayyeda Faruqui)
+
 # 1. The Design Process - Iteration 1 - Establishing an Overall System Structure (AIDAP)
 
 This section presents the results of the activities that are performed in each of the steps of **ADD** (Architectural Design Document) in the first iteration of the design process.
