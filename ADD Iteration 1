@@ -1,1 +1,331 @@
-Include in this file the 7 steps for Iteration 1
+Please note: this file is the original ADD Iteration 1 file from the initial commit of the project repository. 
+All my work for Iteration 1 was done in a Google Doc, where it was easier for me to make tables for many of the steps in order to follow the FCAPS Case Study formatting. 
+I used markdown table generator to convert my Google Doc tables to markdown tables but this plain text file is unable to display the text and tables properly. 
+I tried copying and pasting my work from Google Docs directly into this file, but the formatting is incorrect and messy. 
+Therefore, please refer to ADDIteration1.md to see my work in the correct format for Iteration 1 (Steps 1 to 7, with all diagrams and tables). 
+Thank you. (- Sayyeda Faruqui)
+
+1. The Design Process - Iteration 1 - Establishing an Overall System Structure (AIDAP)
+This section presents the results of the activities that are performed in each of the steps of ADD in the first iteration of the design process.
+1.1 - Step 1 - Review Inputs
+Category
+Details
+Design purpose
+This is a greenfield system from a mature domain. The purpose is to produce a sufficiently detailed design to support the construction of a unified, conversational interface to institutional data at Ontario Tech University, focusing on high availability and performance while strictly adhering to security and privacy standards.
+Primary functional requirements
+From the use cases presented, the primary drivers were determined to be:
+
+UC-1 (Access Academic Details): Because it directly supports the core business of providing personalized, accurate student information via a natural-language interface.
+UC-2 (Receive Notifications): Because it is critical for engaging users and ensuring timely communication, directly impacting the platform's utility.
+UC-5 (Regulate System Integrations): Because it is crucial for system operations, ensuring secure and reliable connectivity with external institutional systems (LMS, Registration) and maintaining data integrity.
+Quality attribute scenarios
+The scenarios were described in the Quality Attribute Scenarios section. They have now been prioritized (based on the provided Importance and Difficulty ratings) as follows:
+
+QA-1 (Performance)
+Importance to the Customer: High
+Difficulty of Implementation: High
+QA-2 (Availability)
+Importance to the Customer: High
+Difficulty of Implementation: High
+QA-3 (Security)
+Importance to the Customer: High
+Difficulty of Implementation: High
+QA-4 (Scalability)
+Importance to the Customer: High
+Difficulty of Implementation: Medium
+QA-5 (Modifiability)
+Importance to the Customer: Medium
+Difficulty of Implementation: Medium
+Constraints
+All of the operational and technical boundaries discussed in the System Constraints section are included as drivers:
+
+CON-1 (Scalability Requirement): Support >= 5,000 concurrent users.
+CON-2 (Cross-Platform Access): Seamless operation across web and mobile browsers.
+CON-3 (Cloud Deployment Environment): Hosted on a university-approved cloud service.
+CON-4 (Privacy and Compliance): Strict adherence to institutional policies.
+CON-5 (Performance Target): Response time <= 2 seconds for most queries.
+CON-6 (Unified AI Backend Models): Reliance on a single underlying AI backend for both voice and text.
+Architectural concerns
+All of the identified design priorities and risks from the Architectural Concerns section are included as drivers:
+
+CRN-1 (Define Overall Microservice and Integration Structure).
+CRN-2 (Utilize Team’s Knowledge of Python (FastAPI) and React for UI).
+CRN-3 (Ensure Secure Handling of SSO and Personally Identifiable Information).
+CRN-4 (Design for Scalability and Cloud Auto-Deployment).
+CRN-5 (Simplify Integration of Future AI Models and External APIs).
+CRN-6 (Provide Clear Module Responsibility Allocation for Team Members).
+
+
+1.2 - Step 2 - Establish Iteration Goal by Selecting Drivers
+This is the first iteration in the design of a greenfield system (AIDAP), so the iteration goal is to achieve the architectural concern CRN-1 of establishing an Overall Microservice and Integration Structure (see the Architectural Concerns section in Step 1).
+Although this iteration is driven by a general architectural concern, the architect must keep in mind all of the drivers that may influence the general structure of the system. In particular, the architect must be mindful of the following influential drivers:
+QA-1 (Performance): The system must generate and deliver a reply within 2 seconds.
+QA-2 (Availability): Fail-over instance must be automatically activated, and the session resumed (Recovery <= 30 seconds for 99.5% uptime).
+QA-3 (Security): 100% of unauthorized access attempts must be blocked and recorded.
+QA-4 (Scalability): The system must handle 5,000 concurrent users and maintain throughput.
+CON-2 (Cross-Platform Access): The platform must work seamlessly across modern web and mobile browsers.
+CON-3 (Cloud Deployment Environment): AIDAP will be hosted on a university approved cloud service (such as Azure or AWS Education Tier).
+CON-5 (Performance Target): Response time must be <= seconds for most queries.
+CRN-2 (Utilize Team’s Knowledge): Leverage team's knowledge of Python (FastAPI) and React for the UI.
+CRN-3 (Secure Handling of SSO and PII): Design must ensure compliance with security and privacy laws for handling user data and SSO tokens.
+CRN-4 (Scalability and Cloud Auto-Deployment): Architect for horizontal scalability using container orchestration and incorporating CI/CD pipelines.
+
+Figure 1: Context Diagram for the AIDAP System
+
+
+1.3 - Step 3 - Choose One or More Elements of the System to Refine
+The element to refine in the first iteration is the entire AIDAP system.
+The overall AIDAP system, which is the initial element to be refined in this iteration, is defined by the scope set forth in the business case: integrating core university systems (LMS, registration, calendar) to provide secure, personalized, conversational access to institutional data.
+In this first iteration, refinement is performed through decomposition driven by the primary architectural concern CRN-1 (Define Overall Microservice and Integration Structure) and influenced heavily by the Security (QA-3) and Scalability (QA-4) quality attribute drivers.
+1.4 - Step 4 - Choose One or More Design Concepts That Satisfy the Selected Drivers
+Design Decisions and Location
+Rationale
+Logically structure the system using the Microservice Architecture pattern.
+Rationale: The Microservice Architecture (MA) is highly appropriate for AIDAP, as it directly addresses multiple drivers:
+CRN-1 (Overall Structure): MA establishes clear, modular boundaries for core services (NLP, Data Integration, User Management).
+QA-4 (Scalability): MA enables horizontal scaling of individual, load-intensive components (like the NLP engine) independently of others.
+CRN-4 (Cloud Auto-Deployment): MA is the foundational pattern for container orchestration (Kubernetes) and CI/CD, aligning with the cloud strategy.
+CRN-5 (Modifiability): Simplifies the integration of future AI models (Stimulus: Integrates a new AI model) by confining changes to a single service.
+
+
+Discarded alternatives:
+Monolithic architecture is discarded because it severely complicates scaling critical components (QA-4), auto-deployment (CRN-4), and updating the system (CRN-5).
+Logically structure the Client part using a Single-Page Application (SPA) architecture (React).
+Rationale: An SPA architecture aligns directly with two key drivers:
+CON-2 (Cross-Platform Access): SPAs built with frameworks like React ensure a consistent, seamless experience across web and mobile browsers.
+CRN-2 (Team Knowledge): Utilizes the team’s pre-existing knowledge of the React framework for rapid development and maintainable code.
+Discarded alternatives:
+Server-Side Rendered (SSR) Web Application is discarded as it provides a less responsive user experience and makes it harder to achieve a rich, application-like feel on mobile/web platforms (influencing QA-1: Performance perceived latency).
+Physically structure the application using the three-tier deployment pattern, implemented with containerization.
+Rationale: A containerized three-tier deployment is chosen to meet both structural and operational constraints:
+CON-3 (Cloud Deployment): This pattern is standard for deployment on university-approved cloud services (Azure/AWS).
+CRN-4 (Scalability/Deployment): Containerization (Docker/Kubernetes) is the prerequisite for horizontal scaling (QA-4) and automated deployment.
+CON-5 (Performance Target): Decoupling the presentation (Tier 1: React SPA), application (Tier 2: FastAPI Microservices), and data (Tier 3: Database) tiers aids in identifying and isolating performance bottlenecks, critical for meeting the <= 2 s target.
+Note: To satisfy QA-2 (Availability) and CON-1 (Scalability >= users), Tier 2 and Tier 3 will require redundancy and load balancing (such as database clustering, multiple application instances), which will be addressed in a subsequent iteration.
+Adopt a Layered Security Design Pattern and utilize Single Sign-On (SSO) as a core authentication mechanism.
+Rationale: This is a crucial decision driven primarily by security and privacy drivers:
+QA-3 (Security): Layered design ensures defense-in-depth, protecting against the Stimulus: Attempts system access by an unauthorized user.
+CRN-3 (Secure Handling of SSO and PII): Explicitly addresses the mandatory requirement to integrate with the institution's SSO system and encrypt PII in transit/at rest.
+Discarded alternatives:
+Internal User or Password Management is discarded because it violates the security and integration goals (CRN-3) by requiring the system to handle sensitive credentials instead of delegating to the established SSO authority.
+Build the backend services using Python with the FastAPI framework.
+Rationale: This decision is directly mandated by the technical constraint and knowledge base:
+CRN-2 (Utilize Team's Knowledge): Leverages the development team's existing expertise in Python (FastAPI), maximizing development speed and code maintainability.
+CON-6 (Unified AI Backend): Python is the industry standard for AI/NLP models, simplifying the implementation of a single, unified backend model for both voice and text queries.
+
+
+1.5 - Step 5 - Instantiate Architectural Elements, Allocate Responsibilities, and Define Interfaces
+The instantiation design decisions considered and made are summarized in the following table. These decisions focus on detailing the elements defined in Step 4 to satisfy core drivers like Security (QA-3), Performance (QA-1), and Integration (UC-5).
+Design Decision and Location
+Rationale
+Instantiate three primary Microservices: NLP Core, Data Integration API, and User/SSO Management.
+The overall Microservice Architecture (from Step 4) is instantiated into its three most critical, load-intensive, and security-sensitive components to address the drivers:
+
+NLP core is dedicated to handling conversational input/output to satisfy the <=2 seconds Performance (QA-1) target, using the chosen Python/FastAPI stack.
+Data Integration API is dedicated to accessing external systems (LMS, Registration) to satisfy UC-5 and ensuring secure data retrieval.
+User/SSO Management is dedicated to enforcing QA-3 (Security), CRN-3 (Secure Handling of PII), and implementing the SSO integration.
+Allocate the primary responsibility for the NLP Core Service to handle all traffic flow and command routing.
+The NLP Core Service is assigned the role of an API Gateway for all conversational requests. This simplifies the client's architecture and makes it easier to enforce security policies and track performance metrics at a single entry point, supporting QA-1 and QA-3.
+Define the data tier interface using a secure, authorized REST/GraphQL API gateway.
+Instead of direct database access, the Data Integration API is mandated to expose all institutional data through an API layer. This is critical for meeting QA-3 (Security) and CON-4 (Privacy) by centralizing access control, logging, and data anonymization/encryption before data is used by the NLP Core. This also directly supports UC-5.
+
+
+The results of these instantiation decisions are recorded in the next step. In this initial iteration, it is typically too early to precisely define all component interfaces, especially within the microservices. In the next iteration, which is dedicated to defining functionality in more detail, interfaces will begin to be fully defined based on the communication needs between the instantiated services.
+1.6 - Step 6 - Sketch Views and Record Design Decisions
+Module View Diagram
+Figure 2 below shows the sketch of a Module View, adapting the microservice and client-side architectures selected in Step 4. This view illustrates the logical decomposition of the AIDAP system, with clear separation between the client and server components and their internal layers/modules.
+
+Figure 2: Module View Diagram for the AIDAP System
+The following table summarizes the information that is captured in Figure 2:
+Element
+Responsibility
+Presentation Client Side (CS)
+This layer contains modules that control user interaction and use case control flow, rendering the conversational UI.
+Business Logic CS
+This layer contains modules that perform local client-side logic, such as input validation or minor state management.
+Data Access CS
+This layer contains modules responsible for communication with the server-side microservices via API calls.
+Cross-Cutting CS
+This layer includes modules with functionality that spans across different client layers, such as client-side security (such as token management, input sanitization), logging, and analytics data collection.
+UI Modules
+These modules render the user interface components (chat bubbles, input fields, dashboards) and receive user inputs.
+UI Process Modules
+These modules orchestrate the control flow of all client-side use cases, managing user interaction sequences and navigation.
+Business Modules CS
+These modules implement specific client-side business operations or expose functionality provided by server-side microservices.
+Business Entities CS
+These entities represent the client-side data model, often a simplified view of server-side entities.
+Communication Modules CS
+These modules consume the REST/gRPC services provided by the API Gateway/NLP Core Service on the server side.
+API Gateway / NLP Core Service (SS)
+This primary entry point for client requests handles natural language processing, orchestrates requests to other microservices, and acts as the central API gateway.
+Data Integration Service (SS)
+This microservice is responsible for securely accessing and integrating data from various external institutional systems (LMS, Registration, Calendar).
+User/SSO Management Service (SS)
+This microservice handles user authentication via SSO, authorization, user profile management, and ensures secure handling of PII.
+Notification Service (SS)
+This microservice is responsible for generating and delivering personalized notifications to users via various channels.
+Analytics Service (SS)
+This microservice aggregates, processes, and provides academic and system usage analytics.
+Data Persistence Layer (SS)
+This layer contains modules responsible for data storage, retrieval, and communication with internal databases or external data sources.
+Cross-Cutting SS
+These modules provide functionality that spans across server-side microservices, such as centralized security enforcement, logging, monitoring, and tracing (observability).
+Database Access Modules (SS)
+These modules are responsible for persistence of business entities into various types of databases (relational, NoSQL). They abstract underlying database technologies.
+External API Access Modules (SS)
+These modules are responsible for secure communication with external institutional APIs (LMS, Registration, Calendar, SSO provider) and abstract their specific protocols.
+
+Deployment View Diagram 
+The deployment diagram in Figure 3 sketches an allocation view that illustrates where the components associated with the modules in the previous diagram will be deployed within the cloud environment.
+
+Figure 3: Initial Deployment Diagram for the AIDAP System
+The deployment diagram in Figure 3 sketches an allocation view that illustrates where the components are deployed. The responsibilities of the elements are summarized here:
+Element
+Responsibility
+User Device (PC, Mobile)
+The user's device, which hosts the client-side logic of the AIDAP Client App (React SPA) and is the source of all conversational queries.
+Microservice Cluster
+The replicated, containerized cluster (Kubernetes) hosting all AIDAP backend logic, including the API Gateway / NLP Core and the Backend Services. It ensures high availability and horizontal scalability for core processing.
+Database Tier
+The clustered, encrypted database responsible for persistence of all AIDAP operational data and ensuring strict security (QA-3) and privacy (CON-4).
+External University Systems
+The set of external university APIs (LMS, Registration, SSO Provider) that provide institutional data and authentication services.
+
+Some information about relationships between a few elements elements in the diagram that is important to record is summarized in the following table:
+Relationship
+Description
+Between User Device and Microservice Cluster
+Communication is secured via HTTPS/WSS and uses OAuth2/OIDC tokens for authentication, ensuring access is conversational and secure.
+Between Microservice Cluster and Database Tier
+Communication is done using secure database drivers (like a PostgreSQL driver), strictly controlled to enforce data access policies.
+Between Microservice Cluster and External University Systems
+Integration uses REST API calls secured via OAuth2, managed by the Data Integration and User/SSO Management services to access institutional data.
+
+
+
+1.7 - Step 7 - Perform Analysis of Current Design and Review Iteration Goal and Achievement of Design Purpose
+
+
+The following table summarizes the design progress by evaluating how well the architectural drivers have been addressed by the decisions made in this first iteration (focused on achieving CRN-1: Establish Overall Microservice and Integration Structure).
+
+Not Addressed
+Partially Addressed
+Completely Addressed
+Design Decisions Made During the Iteration
+
+
+
+
+UC-1 (Access Academic Details)
+Selection of the Microservice Architecture and instantiation of the NLP Core Service and Data Integration Service establish the required functional modules.
+
+
+
+
+UC-2 (Receive Notifications)
+Instantiation of the dedicated Notification Service within the Microservice Cluster establishes the required structural element.
+
+
+
+
+UC-5 (Regulate System Integrations)
+The instantiation of the Data Integration Service and the mandate for an API gateway interface (Step 5) establish the dedicated module for secure integration.
+
+
+QA-1 (Performance, <= 2 s)
+
+
+Microservice decomposition isolates the performance-critical NLP Core for independent scaling. More detailed decisions on caching and inter-service latency are required in the next iteration.
+
+
+QA-2 (Availability 99.5%)
+
+
+The Microservice Cluster and Database Tier are explicitly designed as Replicated and Clustered, respectively, establishing the high-level mechanisms for failover. Detailed configuration and monitoring are pending.
+
+
+QA-3 (Security/Blocking Access)
+
+
+Adoption of the Layered Security Pattern and mandatory SSO integration (CRN-3) establish the security foundation. The User/SSO Management Service is instantiated, but interface details are needed.
+
+
+QA-4 (Scalability >= 5,000 users)
+
+
+The adoption of Microservices and the Kubernetes Cluster (Step 4 & 6) lays the foundation for horizontal scaling, directly addressing this driver. Detailed load balancing and resource limits are pending.
+
+
+CON-1 (Scalability >= 5,000 users)
+
+
+Directly supported by the Microservice Architecture and the use of a Replicated Cluster. Details on deployment configuration need to be finalized to ensure the threshold is met.
+
+
+
+
+CON-2 (Cross-Platform Access)
+Adoption of the React SPA architecture ensures the application works seamlessly across modern web and mobile browsers.
+
+
+
+
+CON-3 (Cloud Deployment)
+The design explicitly uses a Microservice Cluster and Database Tier hosted within a named University Cloud (Azure/AWS) environment.
+
+
+CON-4 (Privacy/Compliance)
+
+
+The design mandates a dedicated User/SSO Management Service and Encrypted Database Tier, but the specific data retention and anonymization logic needs to be defined in detail.
+
+
+CON-5 (Performance Target <= 2 s)
+
+
+See QA-1. The high-level structure supports the goal, but no specific optimizations (such as in-memory caching) have been detailed yet.
+
+
+
+
+CON-6 (Unified AI Backend)
+The instantiation of a single NLP Core Service built on Python (CRN-2) enforces the use of a unified model and data source for both voice and text queries.
+
+
+
+
+CRN-1 (Define Overall Structure)
+Goal Achieved. The selection of the Microservice Architecture, React SPA, and three-tier deployment (Steps 4-6) successfully established the overall system structure.
+
+
+
+
+CRN-2 (Utilize Team Knowledge)
+The selection of Python (FastAPI) and React for the implementation technologies fully satisfies this concern.
+
+
+
+
+CRN-3 (Secure Handling of SSO/PII)
+The instantiation of the User/SSO Management Service and the mandate for secure interfaces directly address this critical concern.
+
+
+
+
+CRN-4 (Design for Scalability/Cloud)
+The selection of the Microservice Architecture and Kubernetes Cluster (Replicated) fully addresses this concern.
+
+
+
+
+CRN-5 (Simplify Future AI Integration)
+The dedicated, isolated NLP Core Service creates a plugin-like boundary, simplifying future model updates with minimal impact to other services.
+
+
+CRN-6 (Module Responsibility Allocation)
+
+
+The instantiation of dedicated services (NLP, Integration, SSO) and the module view sketch have defined high-level ownership. Detailed interface definition is needed to finalize collaboration boundaries.
+
+
