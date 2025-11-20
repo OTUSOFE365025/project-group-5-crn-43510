@@ -70,3 +70,87 @@ The **instantiation design decisions** considered and made are summarized in the
 
 The results of these instantiation decisions are recorded in the next step. In this initial iteration, it is typically too early to precisely define all component interfaces, especially within the microservices. In the next iteration, which is dedicated to defining functionality in more detail, interfaces will begin to be fully defined based on the communication needs between the instantiated services.
 
+## 1.6 - Step 6 - Sketch Views and Record Design Decisions
+
+### Module View Diagram
+
+Figure 2 below shows the sketch of a **Module View**, adapting the microservice and client-side architectures selected in Step 4. This view illustrates the **logical decomposition** of the AIDAP system, with clear separation between the **client** and **server** components and their **internal layers/modules**.
+
+![alt text](image-1.png)
+
+The following table summarizes the information that is captured in Figure 2:
+
+| **Element**                             | **Responsibility**                                                                                                                                                          |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Presentation Client Side (CS)          | This layer contains modules that control user interaction and use case control flow, rendering the conversational UI.                                                      |
+| Business Logic CS                      | This layer contains modules that perform local client-side logic, such as input validation or minor state management.                                                      |
+| Data Access CS                         | This layer contains modules responsible for communication with the server-side microservices via API calls.                                                                |
+| Cross-Cutting CS                       | This layer includes modules with functionality that spans across different client layers, such as client-side security (token management, input sanitization), logging, and analytics data collection. |
+| UI Modules                             | These modules render the user interface components (chat bubbles, input fields, dashboards) and receive user inputs.                                                       |
+| UI Process Modules                     | These modules orchestrate the control flow of all client-side use cases, managing user interaction sequences and navigation.                                               |
+| Business Modules CS                    | These modules implement specific client-side business operations or expose functionality provided by server-side microservices.                                           |
+| Business Entities CS                   | These entities represent the client-side data model, often a simplified view of server-side entities.                                                                      |
+| Communication Modules CS               | These modules consume the REST/gRPC services provided by the API Gateway/NLP Core Service on the server side.                                                              |
+| API Gateway / NLP Core Service (SS)    | This primary entry point for client requests handles natural language processing, orchestrates requests to other microservices, and acts as the central API gateway.       |
+| Data Integration Service (SS)          | This microservice is responsible for securely accessing and integrating data from various external institutional systems (LMS, Registration, Calendar).                    |
+| User/SSO Management Service (SS)       | This microservice handles user authentication via SSO, authorization, user profile management, and ensures secure handling of PII.                                        |
+| Notification Service (SS)              | This microservice is responsible for generating and delivering personalized notifications to users via various channels.                                                   |
+| Analytics Service (SS)                 | This microservice aggregates, processes, and provides academic and system usage analytics.                                                                                 |
+| Data Persistence Layer (SS)            | This layer contains modules responsible for data storage, retrieval, and communication with internal databases or external data sources.                                   |
+| Cross-Cutting SS                       | These modules provide functionality that spans across server-side microservices, such as centralized security enforcement, logging, monitoring, and tracing (observability). |
+| Database Access Modules (SS)           | These modules are responsible for persistence of business entities into various types of databases (relational, NoSQL). They abstract underlying database technologies.     |
+| External API Access Modules (SS)       | These modules are responsible for secure communication with external institutional APIs (LMS, Registration, Calendar, SSO provider) and abstract their specific protocols.  |
+
+## Deployment View Diagram
+
+The deployment diagram in Figure 3 sketches an allocation view that illustrates where the components associated with the modules in the previous diagram will be deployed within the cloud environment.
+
+![alt text](image-2.png)
+
+The deployment diagram in Figure 3 sketches an allocation view that illustrates where the components are deployed. The responsibilities of the elements are summarized here:
+
+The deployment diagram in Figure 3 sketches an allocation view that illustrates where the components are deployed. The responsibilities of the elements are summarized here:
+
+| Element | Responsibility |
+| :--- | :--- |
+| User Device (PC, Mobile) | The user's device, which hosts the client-side logic of the AIDAP Client App (React SPA) and is the source of all conversational queries. |
+| Microservice Cluster | The replicated, containerized cluster (Kubernetes) hosting all AIDAP backend logic, including the API Gateway / NLP Core and the Backend Services. It ensures **high availability** and **horizontal scalability** for core processing. |
+| Database Tier | The clustered, encrypted database responsible for persistence of all AIDAP operational data and ensuring strict **security** (QA-3) and **privacy** (CON-4). |
+| External University Systems | The set of external university APIs (LMS, Registration, SSO Provider) that provide institutional data and authentication services. |
+
+Some information about relationships between a few elements elements in the diagram that is important to record is summarized in the following table:
+
+| Relationship | Description |
+| :--- | :--- |
+| Between User Device and Microservice Cluster | Communication is secured via **HTTPS/WSS** and uses **OAuth2/OIDC tokens** for authentication, ensuring access is conversational and secure. |
+| Between Microservice Cluster and Database Tier | Communication is done using **secure database drivers** (like a PostgreSQL driver), strictly controlled to enforce data access policies. |
+| Between Microservice Cluster and External University Systems | Integration uses **REST API calls** secured via **OAuth2**, managed by the Data Integration and User/SSO Management services to access institutional data. |
+
+---
+
+## 1.7 - Step 7 - Perform Analysis of Current Design and Review Iteration Goal and Achievement of Design Purpose
+
+The following table summarizes the design progress by evaluating how well the architectural drivers have been addressed by the decisions made in this first iteration (focused on achieving CRN-1: Establish Overall Microservice and Integration Structure).
+
+| Not Addressed | Partially Addressed | Completely Addressed | Design Decisions Made During the Iteration |
+| :---: | :---: | :---: | :--- |
+| | | **X** | **UC-1 (Access Academic Details)**<br>Selection of the Microservice Architecture and instantiation of the NLP Core Service and Data Integration Service establish the required functional modules. |
+| | | **X** | **UC-2 (Receive Notifications)**<br>Instantiation of the dedicated Notification Service within the Microservice Cluster establishes the required structural element. |
+| | | **X** | **UC-5 (Regulate System Integrations)**<br>The instantiation of the Data Integration Service and the mandate for an API gateway interface (Step 5) establish the dedicated module for secure integration. |
+| | **X** | | **QA-1 (Performance, <= 2 s)**<br>Microservice decomposition isolates the performance-critical NLP Core for independent scaling. More detailed decisions on caching and inter-service latency are required in the next iteration. |
+| | **X** | | **QA-2 (Availability 99.5%)**<br>The Microservice Cluster and Database Tier are explicitly designed as **Replicated** and **Clustered**, respectively, establishing the high-level mechanisms for failover. Detailed configuration and monitoring are pending. |
+| | **X** | | **QA-3 (Security/Blocking Access)**<br>Adoption of the **Layered Security Pattern** and mandatory **SSO integration** (CRN-3) establish the security foundation. The User/SSO Management Service is instantiated, but interface details are needed. |
+| | **X** | | **QA-4 (Scalability >= 5,000 users)**<br>The adoption of **Microservices** and the **Kubernetes Cluster** (Step 4 & 6) lays the foundation for horizontal scaling, directly addressing this driver. Detailed load balancing and resource limits are pending. |
+| | | **X** | **CON-1 (Scalability >= 5,000 users)**<br>Directly supported by the **Microservice Architecture** and the use of a **Replicated Cluster**. Details on deployment configuration need to be finalized to ensure the threshold is met. |
+| | | **X** | **CON-2 (Cross-Platform Access)**<br>Adoption of the **React SPA** architecture ensures the application works seamlessly across modern web and mobile browsers. |
+| | | **X** | **CON-3 (Cloud Deployment)**<br>The design explicitly uses a **Microservice Cluster and Database Tier** hosted within a named University Cloud (Azure/AWS) environment. |
+| | **X** | | **CON-4 (Privacy/Compliance)**<br>The design mandates a dedicated **User/SSO Management Service** and **Encrypted Database Tier**, but the specific data retention and anonymization logic needs to be defined in detail. |
+| | **X** | | **CON-5 (Performance Target <= 2 s)**<br>See QA-1. The high-level structure supports the goal, but no specific optimizations (such as in-memory caching) have been detailed yet. |
+| | | **X** | **CON-6 (Unified AI Backend)**<br>The instantiation of a single **NLP Core Service** built on Python (CRN-2) enforces the use of a unified model and data source for both voice and text queries. |
+| | | **X** | **CRN-1 (Define Overall Structure)**<br>**Goal Achieved.** The selection of the Microservice Architecture, React SPA, and three-tier deployment (Steps 4-6) successfully established the overall system structure. |
+| | | **X** | **CRN-2 (Utilize Team Knowledge)**<br>The selection of **Python (FastAPI)** and **React** for the implementation technologies fully satisfies this concern. |
+| | | **X** | **CRN-3 (Secure Handling of SSO/PII)**<br>The instantiation of the **User/SSO Management Service** and the mandate for secure interfaces directly address this critical concern. |
+| | | **X** | **CRN-4 (Design for Scalability/Cloud)**<br>The selection of the **Microservice Architecture** and **Kubernetes Cluster** (Replicated) fully addresses this concern. |
+| | | **X** | **CRN-5 (Simplify Future AI Integration)**<br>The dedicated, isolated **NLP Core Service** creates a plugin-like boundary, simplifying future model updates with minimal impact to other services. |
+| | **X** | | **CRN-6 (Module Responsibility Allocation)**<br>The instantiation of dedicated services (NLP, Integration, SSO) and the module view sketch have defined high-level ownership. Detailed interface definition is needed to finalize collaboration boundaries. |
+
