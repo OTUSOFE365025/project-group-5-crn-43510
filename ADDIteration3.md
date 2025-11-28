@@ -94,6 +94,9 @@ The final view includes all instantiated components, communication protocols, an
 ### UC-1 Secure Login Sequence Diagram (SSO/JWT Flow)
 This diagram documents the Iteration 3 security tactic (**QA-3**): user authentication via SSO and subsequent authorization using JWT.
 
+<img width="1037" height="729" alt="image" src="https://github.com/user-attachments/assets/185d803b-a4c3-4804-b7de-3b509680069e" />
+
+
 The diagram explicitly models the **QA-3 Security tactics** defined in Step 4:
 - The **Client** redirects to the **External University Systems (SSO)**.  
 - The **Auth Service** issues the **JWT Token**.  
@@ -103,6 +106,9 @@ The diagram explicitly models the **QA-3 Security tactics** defined in Step 4:
 
 ### UC-2 Receive Notifications Sequence Diagram (Asynchronous Flow)
 This diagram documents the final **UC-2 flow** using the asynchronous queue tactic (**QA-1, UC-2**).
+
+<img width="1098" height="529" alt="image" src="https://github.com/user-attachments/assets/d2d4dc0c-e2e9-4fe3-888d-fb1abff3c9ae" />
+
 
 The diagram explicitly models the **UC-2 Functionality** and **QA-1 Performance tactic**:
 - The **primary flow (Orchestration)** publishes an event to the **Message Queue (MQ)**.  
