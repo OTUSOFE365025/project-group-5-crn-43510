@@ -2,13 +2,15 @@
 SOFE3650F25 Project Repository for Group Number: 5
 
 ## Group Members:
-- Name: Eesha Razia | Student ID: 100930229
+#### Name: Eesha Razia | Student ID: 100930229
 - Deliverable 1 Contribution: Use Case models, Quality Attributes, Business Case
-- Deliverable 2 Contribution: ADD Iteration 2
+- Deliverable 2 Contribution: ADD Iteration 2 (AddIteration2.md created in the phase3branch)
+- Deliverable 3 Contribution: ATAM Utility Tree and Risk Assessment (within this README.MD file of the phase3 branch)
 
-- Name: Sayyeda Faruqui | Student ID: 100912573
+#### Name: Sayyeda Faruqui | Student ID: 100912573
 - Deliverable 1 Contribution: System Constraints, Architectural Concerns, Business Case
-- Deliverable 2 Contribution: ADD Iteration 1
+- Deliverable 2 Contribution: ADD Iteration 1 (ADDIteration1.md created in the phase2 branch)
+- Deliverable 3 Contribution: ADD Iteration 3 (ADDIteration3.md created in this phase3 branch)
 
 
 ## Deliverable 1: Requirements Analysis
