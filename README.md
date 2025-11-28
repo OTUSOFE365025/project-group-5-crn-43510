@@ -28,7 +28,7 @@ Includes Architectural Drivers (derived from the given requirements):
 
 #### Note: All tables used in the markdown files of Deliverable 2 were generated using the following resource: https://www.tablesgenerator.com/markdown_tables in order to follow the ADD FCAPS Case Study Formatting.
 
-## Deliverable 3:ATAM Utility Tree and Risk Assessment
+## Deliverable 3: ATAM Utility Tree and Risk Assessment
 # ATAM Evaluation for AIDAP (AI Digital Assistant Platform)
 
 ## 1. Introduction to ATAM for AIDAP
