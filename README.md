@@ -31,7 +31,7 @@ Includes Architectural Drivers (derived from the given requirements):
 
 ## 1. Introduction to ATAM for AIDAP
 
-The Architectural Trade-off Analysis Method (ATAM) is used to evaluate how well the AIDAP system’s architecture satisfies its critical quality attributes. According to the course lecture (pages 33–36), ATAM focuses on:
+The Architectural Trade-off Analysis Method (ATAM) is used to evaluate how well the AIDAP system’s architecture satisfies its critical quality attributes. ATAM focuses on:
 
 - Performance  
 - Availability / Reliability  
@@ -190,7 +190,7 @@ From the ATAM evaluation, the major architectural risk themes for AIDAP are:
 
 The ATAM evaluation demonstrates that the AIDAP architecture is robust and aligned with the project’s quality attribute drivers. Performance, availability, and security are strongly supported through microservices, caching, circuit breakers, service mesh routing, and layered security. The adapter pattern cleanly supports modifiability and future integrations.
 
-Risks identified—mainly configuration sensitivity, caching consistency, and token management—are manageable and can be mitigated with monitoring, automated testing, and well-defined operational procedures.
+Risks identified mainly configuration sensitivity, caching consistency, and token management—are manageable and can be mitigated with monitoring, automated testing, and well-defined operational procedures.
 
 Overall, the architecture satisfies the quality goals and provides a scalable, secure foundation for implementation.
 
