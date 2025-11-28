@@ -89,3 +89,57 @@ The final view includes all instantiated components, communication protocols, an
 
 <img width="1124" height="623" alt="image" src="https://github.com/user-attachments/assets/45ea431b-4be3-4358-8396-7d57a35bf809" />
 
+## B. Sequence Diagram for Use Cases Needing Updation
+
+### UC-1 Secure Login Sequence Diagram (SSO/JWT Flow)
+This diagram documents the Iteration 3 security tactic (**QA-3**): user authentication via SSO and subsequent authorization using JWT.
+
+The diagram explicitly models the **QA-3 Security tactics** defined in Step 4:
+- The **Client** redirects to the **External University Systems (SSO)**.  
+- The **Auth Service** issues the **JWT Token**.  
+- The **API Gateway** intercepts the subsequent request and uses the **Auth Service** to validate the JWT signature.  
+
+---
+
+### UC-2 Receive Notifications Sequence Diagram (Asynchronous Flow)
+This diagram documents the final **UC-2 flow** using the asynchronous queue tactic (**QA-1, UC-2**).
+
+The diagram explicitly models the **UC-2 Functionality** and **QA-1 Performance tactic**:
+- The **primary flow (Orchestration)** publishes an event to the **Message Queue (MQ)**.  
+- The **Notification Service** consumes the event asynchronously from the MQ.  
+- This asynchronous flow ensures the primary user request (such as initiating the event) meets the **QA-1 Performance target** by not waiting for the notification to be sent.  
+
+---
+
+## C. Final Design Decisions
+
+| Decision                        | Rationale                                                                 | Drivers Addressed              |
+|---------------------------------|---------------------------------------------------------------------------|--------------------------------|
+| **gRPC for Internal Comms**     | Provides better throughput and lower latency than HTTP/REST for high-volume, synchronous service calls. | QA-1 Performance |
+| **Circuit Breaker Implementation** | Prevents the propagation of service failure (cascading failure) from a single faulty component, maintaining overall stability. | QA-2 Availability |
+| **Centralized Logging & Monitoring** | Essential for detecting faults, calculating uptime (99.9%), and providing metrics required for performance analysis and auto-scaling. | QA-2 Availability, QA-1 Performance |
+| **Client-Side Caching & Server-Side Redis** | Reduces the load on core data services and minimizes request latency for frequently accessed data. | QA-1 Performance |
+| **OAuth2/JWT Token Flow**       | Standard industry practice for secure, federated identity management, centralizing authentication/authorization checks. | QA-3 Security |
+
+---
+
+## 3.7 - Step 7 - Perform Analysis of Current Design and Review Iteration Goal
+With the completion of Iteration 3, the entire system architecture is finalized.
+
+| Architectural Driver | Resolution/Tactics Applied                                                                 | Status     |
+|----------------------|---------------------------------------------------------------------------------------------|------------|
+| **QA-1 Performance** | Caching, gRPC, Asynchronous Messaging (MQ).                                                 | Addressed  |
+| **QA-2 Availability (99.9%)** | Replication (Iter 1), Load Balancing (Iter 1), Monitoring, Health Checks, Circuit Breaker. | Addressed  |
+| **QA-3 Security (PII & SSO)** | JWT/OAuth2, TLS/HTTPS, Data Encryption at Rest.                                    | Addressed  |
+| **QA-4 Testability** | Dedicated Test Service (Iter 2), Standardized Interfaces (gRPC).                           | Addressed  |
+| **QA-5 Modifiability** | Microservice Architecture (Iter 1), Layered Design (Iter 1), Clear Component Responsibilities (CRN-6). | Addressed  |
+| **CON-5 Time to Market (12 months)** | Using COTS components (MQ, Redis) and established patterns (Microservices). | Addressed  |
+| **UC-1, UC-2, UC-3 (Functionality)** | All core functional services and flows have been defined and allocated.     | Addressed  |
+| **CRN-6 Module Allocation** | All services (Notification, Analytics, Auth, User, Data, API Gateway) have clear, single responsibilities defined in Steps 5 and 6. | Addressed  |
+
+---
+
+## Conclusion of ADD
+All high-priority architectural drivers (**QA-1, QA-2, QA-3, QA-4, QA-5**) and primary functional requirements have been addressed.  
+The architecture is a **fault-tolerant, secure, and performant Microservice ecosystem** ready for implementation.  
+The architectural design process is complete.
